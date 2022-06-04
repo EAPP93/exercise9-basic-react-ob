@@ -4,7 +4,7 @@ import btnDelete from './icons8-delete-16.svg'
 
 const Todo = ({ todo, remove, toggle }) => {
   return (
-    <li style={
+    <li className='flex-column-center' style={
       {
         listStyle: 'none',
         textDecoration: todo.completed ? 'line-through' : 'none',

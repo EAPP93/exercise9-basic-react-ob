@@ -58,15 +58,14 @@ const TodoContainer = () => {
     {/** mycontext is the context create */}
 
     <div className='todo-container'>
-      <div className='form-container flex' >
-        <h1>TODO FORM</h1>
+      <div className='form-container flex-column-center' >
+        <h2>TODO FORM</h2>
         <TodoForm add={add}></TodoForm>
       </div>
 
-      <div className='list-todo flex'>
+      <div className='list-todo flex-column-center'>
         <ListTODO remove={remove} toggle={toggle} />
       </div>
-
     </div>
 
     </mycontext.Provider>
