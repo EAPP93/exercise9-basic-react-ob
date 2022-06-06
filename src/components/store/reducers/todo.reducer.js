@@ -1,4 +1,4 @@
-import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO } from '../actions/todo.actions'
+import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO, FILTER_TODO } from '../actions/todo.actions'
 
 /** reducers */
 
@@ -34,6 +34,12 @@ const reducerTodo = (state, action) => {
               }
             : todo
         )
+      }
+
+    case FILTER_TODO:
+      return {
+        ...state,
+        filter: action.payload
       }
 
     default:

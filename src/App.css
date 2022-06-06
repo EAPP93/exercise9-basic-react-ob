@@ -36,9 +36,26 @@
 }
 
 .form-container form button{
+  background-color: rgba(87, 220, 238, 0.781);
   display: block;
   width: 100%;
   border-radius: 0 0 0.5em 0.5em;
+}
+
+.list-todo .filter-todo{
+  width: 100%;
+  display: flex;
+}
+
+.list-todo .filter-todo button{
+  height: 2em;
+  flex: 1;
+  border: 1px solid gray;
+  background-color: rgba(87, 220, 238, 0.781);
+}
+
+.list-todo .filter-todo button:active{
+  background-color: rgba(201, 232, 238, 0.781);
 }
 
 .list-todo ul li{
@@ -65,11 +82,18 @@
     background-color: aquamarine;
     min-height: 88vh;
     border-radius: 0.5em;
-    padding-top: 0.5em;
   }
 
   .list-todo ul li{
     width: 72vw;
+  }
+
+  .list-todo .filter-todo button:nth-child(1){
+    border-radius: 0.5em 0 0 0;
+  }
+
+  .list-todo .filter-todo button:nth-child(3){
+    border-radius: 0 0.5em 0 0;
   }
 }
 

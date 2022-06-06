@@ -6,7 +6,7 @@ import Todo from '../pure/Todo'
 
 /** todo reducers and actions */
 import reducerTodo from '../store/reducers/todo.reducer.js'
-import { addTodo, removeTodo, toggleTodo } from '../store/actions/todo.actions'
+import { addTodo, removeTodo, toggleTodo, filterTodo, FILTER_TODO } from '../store//actions/todo.actions'
 
 /** a context is created for useContext */
 const mycontext = React.createContext(null)
@@ -14,11 +14,27 @@ const mycontext = React.createContext(null)
 const ListTODO = ({ remove, toggle }) => {
   /** state context */
   const state = useContext(mycontext)
+
+  let todos = []
+  switch (state.filter) {
+    case FILTER_TODO.SHOW_ACTIVE:
+      todos = state.items.filter(todo => todo.completed === false)
+      break
+
+    case FILTER_TODO.SHOW_COMPLETED:
+      todos = state.items.filter(todo => todo.completed === true)
+      break
+
+    default:
+      todos = state.items
+      break
+  }
+
   return (
     (state.items.length > 0
       ? <ul>
           {
-            state.items.map((todo, index) => (
+            todos.map((todo, index) => (
               <Todo key={index} todo={todo} remove={remove} toggle={toggle}></Todo>
             ))
           }
@@ -31,7 +47,8 @@ const ListTODO = ({ remove, toggle }) => {
 /** state for useReducer */
 const initalState = {
   items: [],
-  isLoanding: false
+  isLoanding: false,
+  filter: FILTER_TODO.SHOW_ALL
 }
 
 const TodoContainer = () => {
@@ -51,7 +68,9 @@ const TodoContainer = () => {
     dispatch(toggleTodo(id))
   }
 
-  console.log(state.items.length)
+  function filter (filter) {
+    dispatch(filterTodo(filter))
+  }
 
   return (
     <mycontext.Provider value={state}>
@@ -64,6 +83,11 @@ const TodoContainer = () => {
       </div>
 
       <div className='list-todo flex-column-center'>
+        <div className='filter-todo'>
+            <button onClick={() => filter(FILTER_TODO.SHOW_ALL)} >Show All</button>
+            <button onClick={() => filter(FILTER_TODO.SHOW_ACTIVE)}>Show Active</button>
+            <button onClick={() => filter(FILTER_TODO.SHOW_COMPLETED)}>Show Completed</button>
+        </div>
         <ListTODO remove={remove} toggle={toggle} />
       </div>
     </div>
